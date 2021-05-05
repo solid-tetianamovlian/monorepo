@@ -81,7 +81,7 @@ class ReceiveBuildDayProjectMetricsUpdates
   }
 
   /// Calculates the average [Duration] of [buildDays] using the
-  /// [BuildDay.totalDuration].
+  /// [BuildDay.successfulBuildsDuration].
   ///
   /// Returns a [Duration.zero] if there are no builds performed during the
   /// given [buildDays].
@@ -107,7 +107,7 @@ class ReceiveBuildDayProjectMetricsUpdates
   Duration _calculateTotalDurationOfBuilds(List<BuildDay> buildDays) {
     return buildDays.fold<Duration>(
       Duration.zero,
-      (value, buildDay) => value + buildDay.totalDuration,
+      (value, buildDay) => value + buildDay.successfulBuildsDuration,
     );
   }
 
@@ -123,7 +123,7 @@ class ReceiveBuildDayProjectMetricsUpdates
   BuildPerformance _mapBuildDayToPerformance(BuildDay buildDay) {
     return BuildPerformance(
       date: buildDay.day,
-      duration: buildDay.totalDuration,
+      duration: buildDay.successfulBuildsDuration,
     );
   }
 }

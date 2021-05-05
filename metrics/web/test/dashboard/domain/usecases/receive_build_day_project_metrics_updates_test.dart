@@ -44,7 +44,7 @@ void main() {
         failed: failed,
         unknown: unknown,
         inProgress: inProgress,
-        totalDuration: totalDuration,
+        successfulBuildsDuration: totalDuration,
         day: day ?? DateTime.now(),
       );
     }
@@ -254,7 +254,7 @@ void main() {
         final expectedPerformances = buildDays.map((buildDay) {
           return BuildPerformance(
             date: buildDay.day,
-            duration: buildDay.totalDuration,
+            duration: buildDay.successfulBuildsDuration,
           );
         });
         final expectedBuildsPerformance = DateTimeSet<BuildPerformance>.from(
