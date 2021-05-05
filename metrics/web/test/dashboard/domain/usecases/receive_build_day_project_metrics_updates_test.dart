@@ -35,7 +35,7 @@ void main() {
       int failed = 0,
       int unknown = 0,
       int inProgress = 0,
-      Duration totalDuration = Duration.zero,
+      Duration successfulBuildsDuration = Duration.zero,
       DateTime day,
     }) {
       return BuildDay(
@@ -44,7 +44,7 @@ void main() {
         failed: failed,
         unknown: unknown,
         inProgress: inProgress,
-        successfulBuildsDuration: totalDuration,
+        successfulBuildsDuration: successfulBuildsDuration,
         day: day ?? DateTime.now(),
       );
     }
@@ -185,9 +185,9 @@ void main() {
     );
 
     test(
-      ".call() returns a build day project metrics with the performance metric with the zero average build duration if the total number of builds is 0",
+      ".call() returns a build day project metrics with the performance metric with the zero average build duration if the total number of successful builds is 0",
       () async {
-        final buildDay = createBuildDay();
+        final buildDay = createBuildDay(failed: 3, unknown: 2);
         final buildDays = [buildDay];
         const expectedAverageDuration = Duration.zero;
 
@@ -210,15 +210,13 @@ void main() {
     test(
       ".call() returns a build day project metrics with the performance metric with the correct average build duration",
       () async {
-        const firstDayDuration = Duration(seconds: 2);
-        const secondDayDuration = Duration(seconds: 3);
         final firstBuildDay = createBuildDay(
-          totalDuration: firstDayDuration,
+          successfulBuildsDuration: const Duration(seconds: 2),
           successful: 2,
         );
         final secondBuildDay = createBuildDay(
-          totalDuration: secondDayDuration,
-          failed: 3,
+          successfulBuildsDuration: const Duration(seconds: 3),
+          successful: 3,
         );
         final buildDays = [firstBuildDay, secondBuildDay];
         const expectedAverageDuration = Duration(seconds: 1);
@@ -243,11 +241,11 @@ void main() {
       ".call() returns a build day project metrics with the performance metric with the correct builds performance",
       () async {
         final firstBuildDay = createBuildDay(
-          totalDuration: const Duration(seconds: 2),
+          successfulBuildsDuration: const Duration(seconds: 2),
           day: DateTime(2020),
         );
         final secondBuildDay = createBuildDay(
-          totalDuration: const Duration(seconds: 3),
+          successfulBuildsDuration: const Duration(seconds: 3),
           day: DateTime(2021),
         );
         final buildDays = [firstBuildDay, secondBuildDay];
