@@ -11,7 +11,7 @@ import '../test_utils/test_data/build_test_data_generator.dart';
 // ignore_for_file: avoid_redundant_argument_values
 
 void main() {
-  group("BuildDataDeserializer1", () {
+  group("BuildDataDeserializer", () {
     const id = 'id';
     const projectId = 'projectId';
     const buildNumber = 1;
