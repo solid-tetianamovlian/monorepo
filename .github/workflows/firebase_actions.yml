@@ -36,7 +36,7 @@ jobs:
 
       - name: Get dependencies
         run: pub get
-        working-directory: metrics/ci_integrations/
+        working-directory: metrics/firebase/
 
       # - name: Run Firestore security rules tests
       #   run: firebase emulators:exec --only firestore "npm run test"
