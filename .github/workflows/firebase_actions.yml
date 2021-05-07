@@ -47,5 +47,5 @@ jobs:
       #   working-directory: metrics/firebase/
 
       - name: Run Cloud Functions tests 
-        run: pub run test --platform node
+        run: pub run --no-sound-null-safety test --platform node
         working-directory: metrics/firebase/functions/
